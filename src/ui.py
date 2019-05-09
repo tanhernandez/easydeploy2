@@ -117,8 +117,8 @@ class Ui(tk.Frame):
     def deploy_to_dev(self):
         if self.is_config_valid(self.config_json, 'dev'):
             print('===== Preparing deploy to DEV Server =====')
-            # ssh = Ssh(self.get_ssh_opts('dev'))
-            # ssh.deploy()
+            ssh = Ssh(self.get_ssh_opts('dev'))
+            ssh.deploy()
 
     def is_config_valid(self, j, target):
         result = True
@@ -146,9 +146,9 @@ class Ui(tk.Frame):
     def get_ssh_opts(self, target):
         return {
             'target': target,
-            'server': self[target + '_server'],
-            'branch_name': self[target + '_branch_name'],
-            'path': self[target + '_path'],
+            'server': getattr(self, target + '_server'),
+            'branch_name': getattr(self, target + '_branch_name').get(),
+            'path': getattr(self, target + '_path'),
             'is_checkout_branch': bool(self.need_checkout_branch.get()),
             'is_git_pull': bool(self.need_git_pull.get()),
             'is_npm_install': bool(self.need_npm_install.get()),

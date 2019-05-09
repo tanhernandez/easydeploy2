@@ -5,15 +5,15 @@ class Ssh:
     def __init__(self, opts):
 
         # Define properties
-        self.target = opts.target
-        self.server = opts.server
-        self.branch_name = opts.branch_name
-        self.path = opts.path
-        self.is_checkout_branch = opts.is_checkout_branch
-        self.is_git_pull = opts.is_git_pull
-        self.is_npm_install = opts.is_npm_install
-        self.is_npm_update = opts.is_npm_update
-        self.is_npm_prod = opts.is_npm_prod
+        self.target = opts.get('target')
+        self.server = opts.get('server')
+        self.branch_name = opts.get('branch_name')
+        self.path = opts.get('path')
+        self.is_checkout_branch = opts.get('is_checkout_branch')
+        self.is_git_pull = opts.get('is_git_pull')
+        self.is_npm_install = opts.get('is_npm_install')
+        self.is_npm_update = opts.get('is_npm_update')
+        self.is_npm_prod = opts.get('is_npm_prod')
 
     def print_values(self):
         print('Printing out defined values...')
@@ -94,10 +94,8 @@ class Ssh:
         # Prepare commands
         commands = self.prepare_commands()
 
-        hosts = self.server.split(',')
-        for host in hosts:
-            print(f'Running commands for host: {host}')
-            # self.connect_via_ssh(host, commands)
+        for host in self.server:
+            self.connect_via_ssh(host, commands)
 
     @staticmethod
     def connect_via_ssh(host, commands):
