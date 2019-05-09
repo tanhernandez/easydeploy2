@@ -109,8 +109,8 @@ class Ui(tk.Frame):
         # Create the Buttons
         self.create_spacer(10)
         self.create_button('Deploy to DEV', self.deploy_to_dev)
-        # self.create_button('Deploy to STAGE', self.deploy_to_stage)
-        # self.create_button('Deploy to PROD', self.deploy_to_prod)
+        self.create_button('Deploy to STAGE', self.deploy_to_stage)
+        self.create_button('Deploy to PROD', self.deploy_to_prod)
         self.create_button('Default', self.set_default_field_values)
         self.create_button('Close', self.parent.destroy)
 
@@ -118,6 +118,18 @@ class Ui(tk.Frame):
         if self.is_config_valid(self.config_json, 'dev'):
             print('===== Preparing deploy to DEV Server =====')
             ssh = Ssh(self.get_ssh_opts('dev'))
+            ssh.deploy()
+
+    def deploy_to_stage(self):
+        if self.is_config_valid(self.config_json, 'stage'):
+            print('===== Preparing deploy to STAGE Server =====')
+            ssh = Ssh(self.get_ssh_opts('stage'))
+            ssh.deploy()
+
+    def deploy_to_prod(self):
+        if self.is_config_valid(self.config_json, 'prod'):
+            print('===== Preparing deploy to PROD Server =====')
+            ssh = Ssh(self.get_ssh_opts('prod'))
             ssh.deploy()
 
     def is_config_valid(self, j, target):
