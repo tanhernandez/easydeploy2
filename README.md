@@ -1,4 +1,4 @@
-# Easy Deploy
+# Easy Deploy 2
 A Basic App for easier deployment via SSH
 
 This application made via python 3, has the purpose of quickly deploying to SSH Server easier.
