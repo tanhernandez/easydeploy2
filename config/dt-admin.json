@@ -1,0 +1,7 @@
+{
+	"dev": {
+		"server": ["deploy@104.211.72.230"],
+		"branch": "master",
+		"path": "/var/www/dt-admin"
+	}
+}
