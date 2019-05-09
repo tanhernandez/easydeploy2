@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "server": [
+      "user@ip-address"
+    ],
+    "branch": "master",
+    "path": "/var/www/your-site"
+  },
+  "stage": {
+    "server": [
+      "user@ip-address"
+    ],
+    "branch": "master",
+    "path": "/var/www/your-site"
+  },
+  "prod": {
+    "server": [
+      "user@ip-address"
+    ],
+    "branch": "master",
+    "path": "/var/www/your-site"
+  }
+}
