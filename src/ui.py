@@ -132,28 +132,49 @@ class Ui(tk.Frame):
             ssh = Ssh(self.get_ssh_opts('prod'))
             ssh.deploy()
 
+    # noinspection PyUnusedLocal
     def is_config_valid(self, j, target):
-        result = True
 
         if j:
             print(f'Current used config is : {self.config_path_filename.get()}')
             print('Checking for missing values...')
 
-            if 'server' not in self.config_json[target]:
+            # Layer 1
+            if target not in self.config_json:
+                print(f'Missing Target Environment!')
+                return False
+
+            # Layer 2
+            elif 'server' not in self.config_json[target]:
                 print(f'Missing value for {target}.server')
-                result = False
+                return False
+            elif not self.config_json[target]['server']:
+                print(f'Value for {target}.server should not be empty!')
+                return False
+
+            # Layer 3
             elif 'branch' not in self.config_json[target]:
                 print(f'Missing value for {target}.branch')
-                result = False
+                return False
+            elif not self.config_json[target]['branch']:
+                print(f'Value for {target}.branch should not be empty!')
+                return False
+
+            # Layer 4
             elif 'path' not in self.config_json[target]:
                 print(f'Missing value for {target}.path')
-                result = False
+                return False
+            elif not self.config_json[target]['path']:
+                print(f'Value for {target}.path should not be empty!')
+                return False
+
+            # If all conditions passed, return True
             else:
-                print('All values are complete!')
+                return True
+
         else:
             print('There are no config values. Please select a config file.')
-            result = False
-        return result
+            return False
 
     def get_ssh_opts(self, target):
         return {

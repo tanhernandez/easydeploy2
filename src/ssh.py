@@ -95,7 +95,10 @@ class Ssh:
         commands = self.prepare_commands()
 
         for host in self.server:
-            self.connect_via_ssh(host, commands)
+            if host:
+                self.connect_via_ssh(host, commands)
+            else:
+                print('Warning: Invalid host address!')
 
     @staticmethod
     def connect_via_ssh(host, commands):
