@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from os.path import expanduser
 import json
-from src.ssh import Ssh
+from ssh import Ssh
 
 
 class Ui(tk.Frame):

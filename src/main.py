@@ -1,5 +1,5 @@
 import tkinter as tk
-from src.ui import Ui
+from ui import Ui
 
 
 # Create class that extends Tk()
